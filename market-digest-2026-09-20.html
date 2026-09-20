@@ -1,0 +1,1111 @@
+<title>Market Digest — Sept 20</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap">
+
+<style>
+/* ───── TOKENS ───── */
+:root {
+  --bg:        #0D1117;
+  --surface:   #161B22;
+  --surface-2: #21262D;
+  --border:    #30363D;
+  --text:      #E6EDF3;
+  --text-muted:#7D8590;
+  --accent:    #00C49A;
+  --neg:       #FF4D6A;
+  --warn:      #F0A243;
+  --gold:      #D4A017;
+  --pos:       #3FB950;
+  --mono:      'IBM Plex Mono', 'Courier New', monospace;
+  --sans:      'IBM Plex Sans', system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg:        #F6F8FA;
+    --surface:   #FFFFFF;
+    --surface-2: #EFF1F5;
+    --border:    #D0D7DE;
+    --text:      #1F2328;
+    --text-muted:#636C76;
+    --accent:    #007A6C;
+    --neg:       #CF222E;
+    --warn:      #9A6700;
+    --gold:      #7D5A00;
+    --pos:       #1A7F37;
+  }
+}
+:root[data-theme="light"] {
+  --bg:        #F6F8FA;
+  --surface:   #FFFFFF;
+  --surface-2: #EFF1F5;
+  --border:    #D0D7DE;
+  --text:      #1F2328;
+  --text-muted:#636C76;
+  --accent:    #007A6C;
+  --neg:       #CF222E;
+  --warn:      #9A6700;
+  --gold:      #7D5A00;
+  --pos:       #1A7F37;
+}
+
+/* ───── BASE ───── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text);
+  background: var(--bg);
+  padding-inline: 20px;
+  padding-block: 0;
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+/* ───── HEADER ───── */
+.digest-header {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  padding-block: 12px;
+  padding-inline: 0;
+  z-index: 10;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.digest-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.digest-date {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ───── SECTIONS ───── */
+.section {
+  padding-block: 32px;
+  border-bottom: 1px solid var(--border);
+}
+.section:last-child { border-bottom: none; }
+
+.section-eyebrow {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.section-title {
+  font-family: var(--mono);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 20px;
+  text-wrap: balance;
+  line-height: 1.3;
+}
+
+/* ───── PRIOR TRADE REVIEW ───── */
+.first-session-note {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--text-muted);
+  padding: 16px 18px;
+  background: var(--surface);
+  border-left: 3px solid var(--border);
+}
+
+/* ───── SNAPSHOT GRID ───── */
+.snapshot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.asset-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 14px 16px;
+}
+
+.asset-card .asset-name {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.asset-card .asset-level {
+  font-family: var(--mono);
+  font-size: 20px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.asset-card .asset-change {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+
+.asset-card .asset-signal {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 8px;
+  line-height: 1.4;
+  border-top: 1px solid var(--border);
+  padding-top: 8px;
+}
+
+.pos { color: var(--pos); }
+.neg { color: var(--neg); }
+.warn { color: var(--warn); }
+.gold-c { color: var(--gold); }
+
+.divergence-flag {
+  background: color-mix(in srgb, var(--warn) 12%, transparent);
+  border-left: 3px solid var(--warn);
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--warn);
+  margin-top: 16px;
+  font-family: var(--mono);
+}
+
+/* ───── NEWS ITEMS ───── */
+.news-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.news-item {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: 0 14px;
+}
+
+.news-rank {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent);
+  padding-top: 3px;
+  text-align: right;
+}
+
+.news-content {}
+
+.news-headline {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
+.news-body {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.news-implication {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--accent);
+  margin-top: 6px;
+  letter-spacing: 0.02em;
+}
+
+/* ───── STOCKS IN FOCUS ───── */
+.stock-focus-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.stock-item {
+  border-left: 2px solid var(--border);
+  padding-left: 16px;
+}
+
+.stock-ticker {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+}
+
+.stock-body {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-top: 3px;
+  line-height: 1.6;
+}
+
+/* ───── MACRO THEMES ───── */
+.theme-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.theme-title {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 10px;
+  letter-spacing: 0.04em;
+}
+
+.theme-body {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* ───── WATCH ITEMS ───── */
+.watch-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.watch-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 16px 18px;
+}
+
+.watch-event {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.watch-scenarios {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.scenario {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.scenario .label {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+  display: block;
+}
+
+.scenario-bull .label { color: var(--pos); }
+.scenario-bear .label { color: var(--neg); }
+.scenario-bull { color: var(--text-muted); }
+.scenario-bear { color: var(--text-muted); }
+
+.watch-threshold {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--warn);
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+
+/* ───── BOTTOM LINE ───── */
+.bottom-line {
+  background: var(--surface);
+  border-left: 3px solid var(--accent);
+  padding: 20px 24px;
+}
+
+.bottom-line p {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--text);
+}
+
+.bottom-line p + p {
+  margin-top: 12px;
+}
+
+.bottom-line p:last-child {
+  color: var(--warn);
+  font-size: 14px;
+}
+
+/* ───── CATALYST PLAYS ───── */
+.catalyst-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.catalyst-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 20px;
+}
+
+.catalyst-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.catalyst-theme {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.catalyst-timeframe {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.catalyst-body {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin-bottom: 10px;
+}
+
+.catalyst-expression {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.catalyst-kill {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--neg);
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+
+.catalyst-kill::before { content: "KILL: "; font-weight: 600; }
+
+/* ───── QUICK REFERENCE TABLE ───── */
+.qr-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 32px;
+}
+
+.qr-table thead th {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.qr-table tbody td {
+  padding: 9px 10px;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+  vertical-align: top;
+  line-height: 1.4;
+}
+
+.qr-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.qr-table .col-asset { color: var(--text); font-weight: 500; white-space: nowrap; }
+.qr-table .col-bias  { color: var(--warn); }
+.qr-table .col-level { color: var(--text); }
+.qr-table .col-signal{ color: var(--text-muted); font-size: 11px; font-family: var(--sans); }
+
+.bias-bull  { color: var(--pos) !important; }
+.bias-bear  { color: var(--neg) !important; }
+.bias-neut  { color: var(--warn) !important; }
+
+/* ───── TRADE SHEET ───── */
+.trade-sheet-subtitle {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 8px 0;
+  margin: 24px 0 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.trade-sheet-subtitle:first-of-type { margin-top: 0; }
+
+.trade-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  font-variant-numeric: tabular-nums;
+  overflow-x: auto;
+  display: block;
+  white-space: nowrap;
+}
+
+.trade-table thead th {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: left;
+  padding: 7px 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.trade-table tbody td {
+  padding: 10px 10px;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
+  vertical-align: top;
+}
+
+.trade-table tbody tr:last-child td { border-bottom: none; }
+
+.td-ticker { color: var(--accent); font-weight: 600; }
+.td-dir-long  { color: var(--pos); font-weight: 600; }
+.td-dir-short { color: var(--neg); font-weight: 600; }
+.td-stop { color: var(--neg); }
+.td-target { color: var(--pos); }
+.td-confidence { color: var(--text-muted); }
+.td-cond { color: var(--warn); white-space: normal; min-width: 180px; }
+.unverified-flag { color: var(--warn); font-size: 10px; }
+
+/* ───── UNVERIFIED PRICE NOTE ───── */
+.price-caveat {
+  background: color-mix(in srgb, var(--warn) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--warn) 30%, transparent);
+  padding: 10px 14px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--warn);
+  margin-top: 16px;
+}
+
+/* ───── RESPONSIVE ───── */
+@media (max-width: 600px) {
+  .snapshot-grid { grid-template-columns: repeat(2, 1fr); }
+  .watch-scenarios { grid-template-columns: 1fr; }
+  .catalyst-header { flex-direction: column; gap: 6px; }
+  .section-title { font-size: 15px; }
+}
+
+@media (max-width: 400px) {
+  .snapshot-grid { grid-template-columns: 1fr 1fr; }
+  .news-item { grid-template-columns: 24px 1fr; }
+}
+
+/* ───── FOOTER ───── */
+.digest-footer {
+  padding-block: 24px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  line-height: 1.7;
+}
+
+hr.thin { border: none; border-top: 1px solid var(--border); margin-block: 20px; }
+</style>
+
+<!-- ── STICKY HEADER ── -->
+<header class="digest-header">
+  <span class="digest-label">Daily Market Digest</span>
+  <span class="digest-date">Sunday, September 20, 2026 — Week Ending Sep 18</span>
+</header>
+
+<!-- ══════════════════════════════════════════
+     SECTION 0 — PRIOR TRADE REVIEW
+══════════════════════════════════════════ -->
+<section class="section">
+  <div class="section-eyebrow">00</div>
+  <div class="section-title">Prior Trade Review</div>
+  <div class="first-session-note">No open positions — first session.</div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SECTION 1 — MARKET SNAPSHOT
+══════════════════════════════════════════ -->
+<section class="section">
+  <div class="section-eyebrow">01</div>
+  <div class="section-title">Market Snapshot</div>
+
+  <!-- US INDICES -->
+  <div class="section-eyebrow" style="margin-bottom:10px; color:var(--text-muted);">US Indices — Friday Sep 18 Close</div>
+  <div class="snapshot-grid">
+    <div class="asset-card">
+      <div class="asset-name">S&P 500</div>
+      <div class="asset-level">6,631.96</div>
+      <div class="asset-change pos">▲ +0.17% day &nbsp;|&nbsp; +12.76% YTD</div>
+      <div class="asset-signal">Absorbed Fed hike + triple witching on low drama. YTD outperformance intact, but 10Y at 5% is a structural headwind.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-name">Nasdaq</div>
+      <div class="asset-level">26,522.55</div>
+      <div class="asset-change pos">▲ +0.39%</div>
+      <div class="asset-signal">Semiconductors and storage led. AI slowdown overhang offset by near-term earnings momentum. Outperformed on triple witching.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-name">Dow Jones</div>
+      <div class="asset-level">51,682.64</div>
+      <div class="asset-change neg">▼ −0.18%</div>
+      <div class="asset-signal">Rate-sensitive industrials and financials dragging. Diverged from Nasdaq on the day — cap-weighted vs. equal-weight leadership split widening.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-name">Russell 2000</div>
+      <div class="asset-level">+0.39%</div>
+      <div class="asset-change warn">Level unverified — confirm before use</div>
+      <div class="asset-signal">Small caps tracking Nasdaq; most exposed to higher-for-longer credit costs. Watch for lagging action into the coming week.</div>
+    </div>
+  </div>
+
+  <!-- VIX + BONDS + GLOBAL -->
+  <div class="section-eyebrow" style="margin-bottom:10px; margin-top:24px; color:var(--text-muted);">Volatility, Rates &amp; Global</div>
+  <div class="snapshot-grid">
+    <div class="asset-card">
+      <div class="asset-name">VIX</div>
+      <div class="asset-level">14.81</div>
+      <div class="asset-change warn">Suppressed — flag</div>
+      <div class="asset-signal">VIX held 14.81 while 10Y crossed 5% and both the Fed and BOJ hiked the same week. Complacency reading, not confidence.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-name">10Y Treasury</div>
+      <div class="asset-level">5.01%</div>
+      <div class="asset-change neg">▲ Risen above 5%</div>
+      <div class="asset-signal">Crossed 5% on Fed hike day and held there. Warsh said "summer's inflation readings do not tell me trends have improved." Duration is the risk.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-name">Nikkei / Japan</div>
+      <div class="asset-level">Under pressure</div>
+      <div class="asset-change neg">BOJ hiked to 1.25%</div>
+      <div class="asset-signal">BOJ at 31-year high. Yen strengthening as carry trade math reverses. Export sectors face margin compression; exact level unverified.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-name">Bitcoin</div>
+      <div class="asset-level">~$81,000</div>
+      <div class="asset-change pos">▲ Above $80K</div>
+      <div class="asset-signal">Held $80K through a rate-hike week — risk-on durability signal. Optical/storage/crypto outperformed on triple witching Friday.</div>
+    </div>
+  </div>
+
+  <!-- COMMODITIES -->
+  <div class="section-eyebrow" style="margin-bottom:10px; margin-top:24px; color:var(--text-muted);">Commodities</div>
+  <div class="snapshot-grid">
+    <div class="asset-card">
+      <div class="asset-name">Gold (XAU/USD)</div>
+      <div class="asset-level gold-c">$4,394.29</div>
+      <div class="asset-change pos">▲ +1.22%</div>
+      <div class="asset-signal">Inflation bid reinforced by Fed hike. Geopolitical premium from Iran war / Red Sea control. Bull target flagged at $4,900.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-name">WTI Crude</div>
+      <div class="asset-level">$100.04</div>
+      <div class="asset-change neg">▼ −1.84% &nbsp;|&nbsp; 3rd session down</div>
+      <div class="asset-signal">Saudi pipeline partial restart announcement drove 3 consecutive sessions of declines from ~$103. Still above $100 — geopolitical floor firm.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-name">Copper</div>
+      <div class="asset-level gold-c">$6.62/lb</div>
+      <div class="asset-change pos">▲ +0.43% &nbsp;|&nbsp; +44.66% YoY</div>
+      <div class="asset-signal">+44.66% year-over-year is a demand signal. Global industrial activity still expanding despite rate hikes. This is the macro health check — passing.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-name">Ethereum</div>
+      <div class="asset-level">~$2,610</div>
+      <div class="asset-change pos">▲ Cleared $2,600 resistance</div>
+      <div class="asset-signal">ETH buyers targeting $2,800 after clearing $2,600. Secondary confirmation of Bitcoin's risk-on signal.</div>
+    </div>
+  </div>
+
+  <!-- DIVERGENCE FLAG -->
+  <div class="divergence-flag">
+    DIVERGENCE — VIX at 14.81 while the Fed and BOJ both tightened in the same week, 10Y hit 5%, and $7T in options rolled off. Volatility is being compressed, not absent. Low VIX here is a risk, not a green light.
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SECTION 2 — TOP NEWS & CATALYSTS
+══════════════════════════════════════════ -->
+<section class="section">
+  <div class="section-eyebrow">02</div>
+  <div class="section-title">Top News &amp; Catalysts</div>
+  <div class="news-list">
+
+    <div class="news-item">
+      <div class="news-rank">01</div>
+      <div class="news-content">
+        <div class="news-headline">Fed Hikes 25bps to 3.75%–4.00% — First in Three Years, Warsh Hawkish</div>
+        <div class="news-body">The FOMC voted 12-0 on September 16 to raise the fed funds rate to a 3.75%–4.00% target range, the first hike since 2023. Chair Warsh stated "inflation is too high and has been for too long" and "this summer's readings do not tell me that underlying trends have meaningfully improved." The dot plot signals another hike before year-end, with eight officials projecting a further move. The Dow dropped 631 points on hike day before recovering through Friday. The market's recovery was not a pivot signal — it was short covering off an oversold condition.</div>
+        <div class="news-implication">POSITIONING: Underweight rate-sensitive (utilities, REITs, long-duration). Favor shorter duration. Higher-for-longer is now the base case, not the tail risk.</div>
+      </div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-rank">02</div>
+      <div class="news-content">
+        <div class="news-headline">Bank of Japan Hikes to 1.25% — Highest Rate Since 1995</div>
+        <div class="news-body">The BOJ voted 7-2 on September 18 to raise its policy rate 25bps to 1.25%, driven by inflation concerns from elevated oil prices linked to the Iran war. This is the highest BOJ rate since before Japan's "lost decade" began. The Fed and BOJ tightening in the same week is structurally significant: the yen carry trade, which funded risk positions across emerging markets and crypto for two years, is now mathematically deteriorating. The two dissenters (Asada and Sato) argued the pace was premature — but the majority has the votes.</div>
+        <div class="news-implication">POSITIONING: Watch USD/JPY for forced carry unwind. Long FXY or short USD/JPY. Risk-off cascade possible if yen strengthens sharply.</div>
+      </div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-rank">03</div>
+      <div class="news-content">
+        <div class="news-headline">Triple Witching: ~$7 Trillion in Options Expire — Market Holds</div>
+        <div class="news-body">September's triple witching (third Friday of the quarter) landed on September 18, the same session as the BOJ hike and two days after the Fed move. Approximately $7 trillion in US options notional expired — one of the largest events on record. The market absorbed it with modest volatility: S&P closed +0.17%, Nasdaq +0.39%, led by semiconductors, optical communication, and storage names. The gamma overhang is now fully cleared. Positioning heading into the week of September 21 is structurally cleaner.</div>
+        <div class="news-implication">POSITIONING: Post-expiry Monday can see directional follow-through as hedges roll. Watch opening action September 21 as a signal for near-term bias.</div>
+      </div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-rank">04</div>
+      <div class="news-content">
+        <div class="news-headline">Saudi East-West Pipeline Partial Restart Announced — Oil Falls Third Day</div>
+        <div class="news-body">Saudi Arabia's East-West Pipeline, which bypasses the Strait of Hormuz, was damaged in Iranian-backed drone strikes from Iraq on September 11. The shutdown disrupted an estimated 39% of global trade. On September 16, the US announced Saudi Arabia would restore roughly half of pipeline capacity "within days," which drove WTI oil lower for three consecutive sessions from ~$103 to $100.04. However, partial restart ≠ full restoration, and the structural risks — Houthi control of Bab al-Mandeb and Iran weighing NPT exit — have not resolved.</div>
+        <div class="news-implication">POSITIONING: Oil range-bound near-term ($95–$105 WTI). Restart delay or re-escalation would spike prices to $110+. Maintain defined-risk oil trade structures.</div>
+      </div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-rank">05</div>
+      <div class="news-content">
+        <div class="news-headline">Iran War: Houthis Control Red Sea Passage, Iran Eyes NPT Exit</div>
+        <div class="news-body">Houthi forces control the port of Mocha and Perim Island at the mouth of the Bab al-Mandeb strait, effectively threatening a second chokepoint to the Saudi pipeline damage. Meanwhile, Iran is reportedly weighing withdrawal from the Nuclear Non-Proliferation Treaty, a signal that could dramatically escalate the conflict. A Trump-Israel post-midterms offensive is being discussed. The combination of closed Hormuz alternatives is the tail risk for global energy markets.</div>
+        <div class="news-implication">POSITIONING: Defense and aerospace (LMT, RTX, NOC) beneficiaries. Energy inverse plays only work if Hormuz stays open. This scenario is not fully priced.</div>
+      </div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-rank">06</div>
+      <div class="news-content">
+        <div class="news-headline">Anthropic CEO Calls for AI Capability Slowdown — Tech Falls</div>
+        <div class="news-body">Anthropic CEO Dario Amodei publicly called for slowing AI capabilities development earlier in September, with major tech figures backing the proposal. AI-related stocks fell on the news. The overhang has not fully resolved and creates a narrative risk for mega-cap tech companies whose current valuations embed aggressive AI revenue growth assumptions.</div>
+        <div class="news-implication">POSITIONING: AI valuation premium at risk on regulatory or corporate slowdown signals. Any incremental news here could accelerate rotation out of AI-weighted names.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SECTION 3 — STOCKS IN FOCUS
+══════════════════════════════════════════ -->
+<section class="section">
+  <div class="section-eyebrow">03</div>
+  <div class="section-title">Stocks in Focus</div>
+  <div class="stock-focus-list">
+
+    <div class="stock-item">
+      <div class="stock-ticker">SMH / SOXX — Semiconductor ETFs</div>
+      <div class="stock-body">Led Nasdaq higher on triple witching Friday alongside optical communication and storage names. This sector is showing relative strength even as AI slowdown rhetoric creates headline risk. Optical comm and data storage are infrastructure plays disconnected from the model-building hype cycle. Key level: Nasdaq 26,500 is immediate support; SMH holding above its 50-day is the structural tell for this leadership trade. No specific entry — watch for a post-expiry consolidation above 26,500 Nasdaq before adding.</div>
+    </div>
+
+    <div class="stock-item">
+      <div class="stock-ticker">GDX / GDXJ — Gold Miners</div>
+      <div class="stock-body">Gold at $4,394 with bull target $4,900 creates a setup in miners, which typically lag the metal on initial moves then catch up with leverage. GDXJ (junior miners) offers more operating leverage but more volatility. The setup depends on gold sustaining above $4,300 — that level is the conviction filter. Miners have underperformed gold YTD; the spread historically closes when gold breaks to new all-time highs. See Speculative Watchlist in Trade Sheet.</div>
+    </div>
+
+    <div class="stock-item">
+      <div class="stock-ticker">XLE / XOM / CVX — Energy Sector</div>
+      <div class="stock-body">Oil at $100.04 with three consecutive declining sessions as Saudi restart was announced. See Section 2, Item 4. The setup here is conditional: XLE short only triggers if pipeline restart is confirmed AND no new Hormuz escalation. Long-side energy plays only make sense on a re-escalation (pipeline delays, new attack, Iran NPT exit announcement). The binary nature of this trade means sized at max 0.5% portfolio — see Trade Sheet watchlist. Level to watch: WTI $95 (restart fully priced) vs. $108 (new escalation).
+      </div>
+    </div>
+
+    <div class="stock-item">
+      <div class="stock-ticker">EWJ — Japan Equity ETF</div>
+      <div class="stock-body">BOJ at 31-year high creates structural headwinds for Japanese exporters whose earnings are built on a weak yen. Toyota, Sony, Honda — the Nikkei's heavy hitters — all face margin compression with yen appreciation. The direction is clear; timing is the risk because BOJ is still early in its hiking cycle. EWJ is the blunt instrument. A more precise expression is shorting USD/JPY directly. Watch for yen holding gains through the week before sizing.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SECTION 4 — MACRO & MARKET THEMES
+══════════════════════════════════════════ -->
+<section class="section">
+  <div class="section-eyebrow">04</div>
+  <div class="section-title">Macro &amp; Market Themes</div>
+
+  <div class="theme-block">
+    <div class="theme-title">Theme 1: Synchronized Global Tightening — The Carry Regime is Over</div>
+    <div class="theme-body">For two years, the yen carry trade — borrowing cheap yen to fund positions in US equities, EM debt, and risk assets — was the liquidity engine that explained much of the rally in risk. The BOJ was the last major central bank holding near-zero rates. That engine is now running in reverse: BOJ at 1.25% with more hikes signaled, Fed resuming its own cycle. This is the first synchronized global tightening since the 2022-2023 period that preceded the last correction. The market is not pricing this yet — VIX at 14.81 during a week where two G7 central banks hiked tells you that. We are in the early innings of a regime change. The question is whether the unwinding is orderly (gradual yen appreciation, slow repricing) or disorderly (August 2024-style flash crash if a large carry position unwinds suddenly). The current setup — markets making new highs, VIX compressed, 10Y above 5% — rhymes with late 2022 before the next leg down.</div>
+  </div>
+
+  <div class="theme-block">
+    <div class="theme-title">Theme 2: Iran War Oil Premium — The Floor, Not the Peak</div>
+    <div class="theme-body">The consensus trade after the pipeline restart announcement is that WTI at $100 is a ceiling and the market normalizes lower. This is the wrong read. The structural damage to Middle East supply infrastructure — Saudi pipeline at half capacity for weeks, Houthi control of Bab al-Mandeb, Iran weighing NPT exit — represents a multi-month risk premium, not a single-event spike. Q2 earnings estimates in energy were built assuming $85-90 WTI; at $100+, they'll be revised up sharply. The Fed's BOJ-forced admission that inflation is "too high" is also an indirect oil story — higher oil feeds CPI which feeds more hikes which feeds the carry unwind. These are all the same trade, linked. Copper at $6.62 (+44.66% YoY) signals the demand side is still intact despite all of this, which means the market is not in a demand-destruction regime — yet. That distinction matters for timing exits.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SECTION 5 — WHAT TO WATCH NEXT
+══════════════════════════════════════════ -->
+<section class="section">
+  <div class="section-eyebrow">05</div>
+  <div class="section-title">What to Watch Next</div>
+  <div class="watch-list">
+
+    <div class="watch-item">
+      <div class="watch-event">PCE Inflation Data (Next Week) — Fed's Preferred Measure</div>
+      <div class="watch-scenarios">
+        <div class="scenario scenario-bull">
+          <span class="label">Bullish</span>
+          PCE prints at or below 2.5% — "one-and-done" hike narrative survives. Rate-sensitive sectors bounce, 10Y pulls back from 5%, small caps outperform.
+        </div>
+        <div class="scenario scenario-bear">
+          <span class="label">Bearish</span>
+          PCE stays above 3.0% — second hike becomes base case. 10Y pushes toward 5.25-5.50%, equity multiples compress. Gold catches further bid.
+        </div>
+      </div>
+      <div class="watch-threshold">THRESHOLD: PCE ≥ 3.0% forces market to price second hike before year-end.</div>
+    </div>
+
+    <div class="watch-item">
+      <div class="watch-event">Saudi Pipeline Restart Confirmation vs. Re-escalation</div>
+      <div class="watch-scenarios">
+        <div class="scenario scenario-bull">
+          <span class="label">Bullish (for broader market)</span>
+          Pipeline fully operational confirmed this week — WTI tests $95. Energy sector underperforms. Inflation expectations edge lower. Market relief rally.
+        </div>
+        <div class="scenario scenario-bear">
+          <span class="label">Bearish</span>
+          Restart delayed, re-attacked, or Hormuz situation escalates — WTI spikes to $108-115. Inflation expectations re-anchor higher. Stagflation narrative gains traction.
+        </div>
+      </div>
+      <div class="watch-threshold">THRESHOLD: WTI above $105 again = restart has failed or new attack occurred.</div>
+    </div>
+
+    <div class="watch-item">
+      <div class="watch-event">USD/JPY — Yen Carry Unwind Monitor</div>
+      <div class="watch-scenarios">
+        <div class="scenario scenario-bull">
+          <span class="label">Bullish (for yen)</span>
+          USD/JPY breaks below key September support — orderly carry trade reduction begins. EM and crypto see moderate outflows, manageable.
+        </div>
+        <div class="scenario scenario-bear">
+          <span class="label">Bearish (for risk assets)</span>
+          USD/JPY breaks support sharply on forced unwind — August 2024-style risk-off cascade. VIX spikes, Bitcoin sold, EM FX stress.
+        </div>
+      </div>
+      <div class="watch-threshold">THRESHOLD: USD/JPY losing 3+ handles in a single session = forced unwind underway.</div>
+    </div>
+
+    <div class="watch-item">
+      <div class="watch-event">Fed Speakers — Warsh's Next Signal</div>
+      <div class="watch-scenarios">
+        <div class="scenario scenario-bull">
+          <span class="label">Bullish</span>
+          Warsh or other officials acknowledge inflation progress — rates-sensitive sectors bounce, 10Y retreats from 5%.
+        </div>
+        <div class="scenario scenario-bear">
+          <span class="label">Bearish</span>
+          Warsh reiterates or strengthens hawkish view — second hike priced more firmly, long-duration assets reprice again.
+        </div>
+      </div>
+      <div class="watch-threshold">THRESHOLD: Any language suggesting year-end cut is off the table = duration trade confirmed.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SECTION 6 — BOTTOM LINE
+══════════════════════════════════════════ -->
+<section class="section">
+  <div class="section-eyebrow">06</div>
+  <div class="section-title">Bottom Line</div>
+  <div class="bottom-line">
+    <p>The defining event of this week was not the $7 trillion options expiration or the oil pipeline news — it was the Fed and BOJ both tightening in the same week for the first time in years, closing the carry trade escape valve that funded two years of risk-on positioning, with the market absorbing it at a VIX of 14.81 as if none of it mattered.</p>
+    <p>For the next 3-5 days, the key binaries are PCE inflation confirming or denying the second-hike scenario and Saudi pipeline restart timing — either one breaking against the market's current complacent read could generate outsized volatility in a regime where gamma hedges just rolled off and positioning is clean but not defensive.</p>
+    <p>The risk that breaks everything is not the Fed hiking again — it is a coordinated geopolitical move that simultaneously closes the Strait of Hormuz and Bab al-Mandeb, cutting ~35% of seaborne oil trade and sending WTI above $120 into a market that has spent three sessions buying the pipeline-restart narrative.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SECTION 7 — CATALYST PLAYS
+══════════════════════════════════════════ -->
+<section class="section">
+  <div class="section-eyebrow">07</div>
+  <div class="section-title">Catalyst Plays</div>
+  <div class="catalyst-list">
+
+    <div class="catalyst-item">
+      <div class="catalyst-header">
+        <div class="catalyst-theme">Gold / Inflation Re-rating as Structural Bid</div>
+        <div class="catalyst-timeframe">30–60 days</div>
+      </div>
+      <div class="catalyst-body">The Fed confirmed it is fighting persistent inflation — not anchoring expectations of future cuts. In prior cycles, gold rallied through and after hike cycles when inflation remained unresolved because the real yield differential shifted in gold's favor. Iran war supply shocks keep energy prices elevated, which feeds PCE, which extends Warsh's hawkish mandate. Gold is not pricing in a resolution — it is pricing in continuation, and $4,394 with a bull target at $4,900 from current analysts reflects that. The geopolitical premium (Houthi Red Sea control, Iran NPT exit risk) is additive.</div>
+      <div class="catalyst-expression">→ GLD (SPDR Gold Shares) or GDXJ for miner leverage. See Trade Sheet for levels.</div>
+      <div class="catalyst-kill">Saudi pipeline fully restores AND Iran-Houthi ceasefire confirmed → oil below $90 → PCE trajectory improves → gold loses both inflation and geopolitical premium simultaneously.</div>
+    </div>
+
+    <div class="catalyst-item">
+      <div class="catalyst-header">
+        <div class="catalyst-theme">Short Duration / "Higher for Longer" Bond Expression</div>
+        <div class="catalyst-timeframe">30–60 days</div>
+      </div>
+      <div class="catalyst-body">Warsh's explicit language was non-data-dependent in tone: he did not say "if inflation persists." He said summer readings do not show improvement. This is structural hawkishness, not conditional. The dot plot shows another hike before year-end. 10Y above 5% with a unanimous 12-0 vote behind the decision means the Fed is not blinking. Duration (long bonds, utilities, REITs, rate-sensitive growth) is the most direct casualty. TBT (2x short 20-year+) captures the yield expansion with leverage, TBF for 1x non-leveraged. The trade is well-established; the edge is in holding it past consensus capitulation.</div>
+      <div class="catalyst-expression">→ TBT (2× Short 20+ Year Treasury) or TBF (1×). Sizes per Trade Sheet. (Prices unverified — see below.)</div>
+      <div class="catalyst-kill">PCE prints ≤2.5% and Warsh pivots language toward "data allows patience" → second hike depriced → 10Y pulls back below 4.6% → TBT thesis breaks.</div>
+    </div>
+
+    <div class="catalyst-item">
+      <div class="catalyst-header">
+        <div class="catalyst-theme">Yen Carry Unwind — Long JPY / Short USD-JPY</div>
+        <div class="catalyst-timeframe">30–90 days</div>
+      </div>
+      <div class="catalyst-body">The mathematics of the yen carry trade were built on BOJ near-zero rates and a persistent rate differential with the US. BOJ at 1.25% — with more hikes signaled and inflation above target — means the spread is narrowing and the trade is increasingly expensive to hold. Two things accelerate the unwind: (1) any sharp yen appreciation that creates mark-to-market losses on yen-funded positions, (2) any risk-off event (oil spike, geopolitical escalation) that triggers simultaneous de-leveraging. The August 2024 unwind was a preview — this setup is structurally more dangerous because both legs (BOJ hiking, Fed resuming) are now moving simultaneously. The expression is long yen: either FXY ETF or direct USD/JPY short via FX.</div>
+      <div class="catalyst-expression">→ FXY (CurrencyShares Japanese Yen Trust) or short USD/JPY via FX broker. (Prices unverified — see below.)</div>
+      <div class="catalyst-kill">BOJ pauses or explicitly signals end to hike cycle, or US-Japan rate differential widens further via faster Fed hikes — both would sustain carry trade economics and delay yen appreciation.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SECTION 8 — QUICK REFERENCE
+══════════════════════════════════════════ -->
+<section class="section">
+  <div class="section-eyebrow">08</div>
+  <div class="section-title">Quick Reference</div>
+
+  <!-- Market Overview Table -->
+  <div class="section-eyebrow" style="color:var(--text-muted); margin-bottom:10px;">Market Overview — Sep 18, 2026 Close</div>
+  <div style="overflow-x: auto;">
+    <table class="qr-table">
+      <thead>
+        <tr>
+          <th>Asset</th>
+          <th>Bias</th>
+          <th>Level</th>
+          <th>Signal Read</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="col-asset">S&amp;P 500</td>
+          <td class="col-bias bias-neut">Neutral</td>
+          <td class="col-level">6,631.96</td>
+          <td class="col-signal">Resilient triple-witching close, +12.76% YTD, but 10Y at 5% is a structural multiple headwind going forward.</td>
+        </tr>
+        <tr>
+          <td class="col-asset">Nasdaq</td>
+          <td class="col-bias bias-bull">Slight Bull</td>
+          <td class="col-level">26,522.55</td>
+          <td class="col-signal">Semis and storage led; AI slowdown rhetoric is an overhang but not yet a structural breakdown. Watch 26,500 support.</td>
+        </tr>
+        <tr>
+          <td class="col-asset">Dow</td>
+          <td class="col-bias bias-neut">Neutral / Bear</td>
+          <td class="col-level">51,682.64</td>
+          <td class="col-signal">Rate-sensitive components lagging; Dow underperforming Nasdaq confirms value/cyclical headwinds in a "higher for longer" regime.</td>
+        </tr>
+        <tr>
+          <td class="col-asset">Russell 2000</td>
+          <td class="col-bias bias-bear">Caution</td>
+          <td class="col-level">+0.39% day <span class="unverified-flag">(level unverified)</span></td>
+          <td class="col-signal">Small caps most exposed to rising credit costs. Participation in day's rally does not offset structural headwind from 5%+ rates.</td>
+        </tr>
+        <tr>
+          <td class="col-asset">VIX</td>
+          <td class="col-bias bias-neut">Complacent</td>
+          <td class="col-level">14.81</td>
+          <td class="col-signal">Deeply suppressed relative to macro event density this week. Divergence from rate action is notable — not a confidence signal.</td>
+        </tr>
+        <tr>
+          <td class="col-asset">10Y Treasury</td>
+          <td class="col-bias bias-bear">Bear (for bonds)</td>
+          <td class="col-level">5.01%</td>
+          <td class="col-signal">Above 5% post-Fed, Warsh explicitly hawkish. Next level watch: 5.25–5.50% if PCE disappoints. Duration is the risk asset.</td>
+        </tr>
+        <tr>
+          <td class="col-asset gold-c">Gold</td>
+          <td class="col-bias bias-bull">Bull</td>
+          <td class="col-level gold-c">$4,394.29</td>
+          <td class="col-signal">Inflation bid + geopolitical premium from Iran war building. Analyst bull target $4,900. Both drivers remain intact.</td>
+        </tr>
+        <tr>
+          <td class="col-asset">Oil (WTI)</td>
+          <td class="col-bias bias-neut">Neutral / Range</td>
+          <td class="col-level">$100.04</td>
+          <td class="col-signal">3rd session lower on restart news. Floor $95 (full restart priced), ceiling $108+ on any new escalation. $100 is not a ceiling.</td>
+        </tr>
+        <tr>
+          <td class="col-asset gold-c">Copper</td>
+          <td class="col-bias bias-bull">Bull</td>
+          <td class="col-level gold-c">$6.62/lb</td>
+          <td class="col-signal">+44.66% YoY. Global demand signal is constructive — not yet in demand-destruction territory despite rate pressure. Green flag for growth outlook.</td>
+        </tr>
+        <tr>
+          <td class="col-asset">Bitcoin</td>
+          <td class="col-bias bias-bull">Neutral / Bull</td>
+          <td class="col-level">~$81,000</td>
+          <td class="col-signal">Held $80K through a full rate-hike week. Risk-on durability. Carry unwind risk is the primary downside scenario.</td>
+        </tr>
+        <tr>
+          <td class="col-asset">Ethereum</td>
+          <td class="col-bias bias-bull">Neutral / Bull</td>
+          <td class="col-level">~$2,610</td>
+          <td class="col-signal">Cleared $2,600 resistance; buyers targeting $2,800. Confirms crypto risk-on signal alongside Bitcoin.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Trade Sheet -->
+  <div class="trade-sheet-subtitle">Active Trades — Confidence 2–3</div>
+  <div style="overflow-x: auto;">
+    <table class="trade-table">
+      <thead>
+        <tr>
+          <th>Ticker</th>
+          <th>Dir</th>
+          <th>Entry Zone</th>
+          <th>Target</th>
+          <th>Stop</th>
+          <th>Timeframe</th>
+          <th>Confidence</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="td-ticker">GLD</td>
+          <td class="td-dir-long">LONG</td>
+          <td>$4,370–$4,410</td>
+          <td class="td-target">$4,650 / $4,900 ext.</td>
+          <td class="td-stop">$4,250</td>
+          <td>30–60 days</td>
+          <td class="td-confidence">2</td>
+        </tr>
+        <tr>
+          <td class="td-ticker">TBT</td>
+          <td class="td-dir-long">LONG</td>
+          <td><span class="unverified-flag">PRICE UNVERIFIED — confirm before entry</span></td>
+          <td class="td-target">10Y toward 5.5%+</td>
+          <td class="td-stop">10Y drops below 4.60%</td>
+          <td>30–60 days</td>
+          <td class="td-confidence">2</td>
+        </tr>
+        <tr>
+          <td class="td-ticker">FXY</td>
+          <td class="td-dir-long">LONG</td>
+          <td><span class="unverified-flag">PRICE UNVERIFIED — confirm before entry</span></td>
+          <td class="td-target">USD/JPY structural re-rating</td>
+          <td class="td-stop">BOJ pause signal</td>
+          <td>30–90 days</td>
+          <td class="td-confidence">2</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="trade-sheet-subtitle">Speculative Watchlist — Confidence 1</div>
+  <div style="overflow-x: auto;">
+    <table class="trade-table">
+      <thead>
+        <tr>
+          <th>Ticker</th>
+          <th>Dir</th>
+          <th>Entry Zone</th>
+          <th>Target</th>
+          <th>Stop</th>
+          <th>Timeframe</th>
+          <th>Conf</th>
+          <th>Condition Required</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="td-ticker">XLE</td>
+          <td class="td-dir-short">SHORT</td>
+          <td><span class="unverified-flag">PRICE UNVERIFIED</span> ~$105–$110</td>
+          <td class="td-target">$92–$95</td>
+          <td class="td-stop">None — binary event, full position at risk</td>
+          <td>2–4 weeks</td>
+          <td class="td-confidence">1</td>
+          <td class="td-cond">Saudi pipeline fully confirmed operational AND no new geopolitical escalation (Iran/Houthi)</td>
+        </tr>
+        <tr>
+          <td class="td-ticker">GDXJ</td>
+          <td class="td-dir-long">LONG</td>
+          <td><span class="unverified-flag">PRICE UNVERIFIED</span> ~$55–$60</td>
+          <td class="td-target">$75</td>
+          <td class="td-stop">$48</td>
+          <td>30–60 days</td>
+          <td class="td-confidence">1</td>
+          <td class="td-cond">Gold sustains above $4,300 for 5+ trading sessions to confirm metal-miner spread compression</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="price-caveat">
+    NOTE — ETF entry zones for TBT, FXY, XLE, and GDXJ are derived from macro context and are not confirmed against live quotes pulled in this session. Verify current prices before placing any order. GLD entry zone is estimated from XAU/USD $4,394 gold spot — confirm the ETF level separately. Max position size for Confidence 1 trades: 0.5% of portfolio.
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="digest-footer">
+  <div>Generated: Sunday, September 20, 2026. Data reflects Friday September 18, 2026 closing prices. Cryptocurrency prices as of September 20, 2026 early session. All prices should be verified before acting. This digest is for informational purposes only.</div>
+  <div style="margin-top:8px; color: color-mix(in srgb, var(--text-muted) 60%, transparent);">Sources: TheStreet, CNBC, Bloomberg, Charles Schwab, Benzinga, Investing.com, FinanceFeeds, KuCoin, UseTheBitcoin, TradingKey, EBC Financial Group, Naked Capitalism, CNN Business.</div>
+</footer>
