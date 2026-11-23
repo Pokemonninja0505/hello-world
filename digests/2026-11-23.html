@@ -1,0 +1,987 @@
+<!– Daily Market Digest — November 23, 2026 –>
+<title>Market Digest — Nov 23</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap">
+
+<style>
+/* ── Layout: dense editorial column with sticky header and semantic signal tags ── */
+:root {
+  --bg:        #F7F6F3;
+  --bg-card:   #FFFFFF;
+  --bg-subtle: #EEEDE9;
+  --fg:        #1A1917;
+  --fg-mid:    #4A4845;
+  --fg-mute:   #7A7875;
+  --border:    #DDD9D2;
+  --accent:    #2B4B7E;      /* slate-navy */
+  --accent-fg: #FFFFFF;
+  --bull:      #0F7A4A;
+  --bull-bg:   #E6F4ED;
+  --bear:      #C0392B;
+  --bear-bg:   #FAEAE8;
+  --neut:      #6B6560;
+  --neut-bg:   #EDEAE6;
+  --warn:      #A0520B;
+  --warn-bg:   #FDF0E2;
+  --mono:      "Space Mono", ui-monospace, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:        #131210;
+    --bg-card:   #1D1C19;
+    --bg-subtle: #252320;
+    --fg:        #EAE8E3;
+    --fg-mid:    #A8A49E;
+    --fg-mute:   #6B6760;
+    --border:    #333028;
+    --accent:    #4A7BC4;
+    --accent-fg: #FFFFFF;
+    --bull:      #2ECC79;
+    --bull-bg:   #0A2E1C;
+    --bear:      #E05A4A;
+    --bear-bg:   #2E0E0A;
+    --neut:      #9A968F;
+    --neut-bg:   #2A2825;
+    --warn:      #E09040;
+    --warn-bg:   #2E1E06;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg:        #131210;
+  --bg-card:   #1D1C19;
+  --bg-subtle: #252320;
+  --fg:        #EAE8E3;
+  --fg-mid:    #A8A49E;
+  --fg-mute:   #6B6760;
+  --border:    #333028;
+  --accent:    #4A7BC4;
+  --accent-fg: #FFFFFF;
+  --bull:      #2ECC79;
+  --bull-bg:   #0A2E1C;
+  --bear:      #E05A4A;
+  --bear-bg:   #2E0E0A;
+  --neut:      #9A968F;
+  --neut-bg:   #2A2825;
+  --warn:      #E09040;
+  --warn-bg:   #2E1E06;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--bg); color: var(--fg); }
+
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  max-width: 900px;
+  margin: 0 auto;
+  padding-left:  max(16px, env(safe-area-inset-left,  0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 32px;
+}
+
+/* ── Masthead ── */
+.masthead {
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 16px;
+  margin-bottom: 28px;
+}
+.masthead-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--fg-mute);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.masthead-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(22px, 4vw, 32px);
+  font-weight: 700;
+  letter-spacing: -.02em;
+  color: var(--fg);
+  line-height: 1.1;
+}
+.masthead-sub {
+  font-size: 13px;
+  color: var(--fg-mid);
+  margin-top: 6px;
+}
+.masthead-alert {
+  display: inline-block;
+  margin-top: 10px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--bear);
+  background: var(--bear-bg);
+  border: 1px solid var(--bear);
+  border-radius: 3px;
+  padding: 2px 8px;
+}
+
+/* ── Section headers ── */
+.section { margin-top: 36px; }
+.section-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+.section-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--fg);
+  margin-bottom: 14px;
+  text-wrap: balance;
+}
+hr.rule {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 28px 0;
+}
+
+/* ── Signal chips ── */
+.chip {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  border-radius: 3px;
+  padding: 2px 7px;
+  vertical-align: middle;
+  line-height: 18px;
+}
+.chip-bull  { color: var(--bull); background: var(--bull-bg); }
+.chip-bear  { color: var(--bear); background: var(--bear-bg); }
+.chip-neut  { color: var(--neut); background: var(--neut-bg); }
+.chip-warn  { color: var(--warn); background: var(--warn-bg); }
+.chip-high  { color: var(--bear); background: var(--bear-bg); }
+.chip-mod   { color: var(--warn); background: var(--warn-bg); }
+
+/* ── Numbers ── */
+.up   { color: var(--bull); font-weight: 600; }
+.dn   { color: var(--bear); font-weight: 600; }
+.flat { color: var(--neut); }
+.num  { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+/* ── Tables ── */
+.tbl-wrap { overflow-x: auto; margin: 12px 0; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+thead th {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+  text-align: left;
+  padding: 6px 12px 6px 0;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+tbody td {
+  padding: 8px 12px 8px 0;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  color: var(--fg);
+}
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: var(--bg-subtle); }
+.td-mono { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.td-ticker {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  white-space: nowrap;
+}
+.td-signal { font-size: 12px; color: var(--fg-mid); max-width: 260px; }
+.td-level { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--fg); }
+
+/* ── News items ── */
+.news-item {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.news-item:last-child { border-bottom: none; }
+.news-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+.news-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  flex: 1;
+  min-width: 0;
+}
+.news-body { font-size: 13px; color: var(--fg-mid); line-height: 1.65; }
+.news-impl {
+  margin-top: 6px;
+  font-size: 12px;
+  font-style: italic;
+  color: var(--fg-mute);
+  border-left: 2px solid var(--accent);
+  padding-left: 10px;
+}
+
+/* ── Stock Focus ── */
+.stock-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+}
+.stock-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+.stock-ticker {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--accent);
+}
+.stock-name { font-size: 13px; color: var(--fg-mid); }
+.stock-body { font-size: 13px; color: var(--fg-mid); line-height: 1.65; }
+.stock-level {
+  margin-top: 8px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--warn);
+  background: var(--warn-bg);
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 3px;
+}
+
+/* ── Catalyst Plays ── */
+.play-item {
+  border-left: 3px solid var(--accent);
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  background: var(--bg-card);
+  border-radius: 0 6px 6px 0;
+}
+.play-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+.play-row {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 4px 12px;
+  font-size: 12px;
+  margin-top: 4px;
+}
+.play-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+  padding-top: 1px;
+}
+.play-kill {
+  font-size: 12px;
+  color: var(--bear);
+  background: var(--bear-bg);
+  border-radius: 4px;
+  padding: 6px 10px;
+  margin-top: 10px;
+}
+
+/* ── Bottom Line ── */
+.bottom-line {
+  background: var(--accent);
+  color: var(--accent-fg);
+  border-radius: 6px;
+  padding: 20px 24px;
+}
+.bottom-line p {
+  font-size: 14px;
+  line-height: 1.7;
+}
+.bottom-line p + p { margin-top: 10px; }
+
+/* ── Trade Sheet ── */
+.trade-section {
+  margin-top: 20px;
+}
+.trade-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--border);
+}
+.unverified {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--warn);
+  background: var(--warn-bg);
+  padding: 1px 6px;
+  border-radius: 3px;
+  display: inline-block;
+}
+.conf {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .06em;
+}
+.conf-3 { color: var(--bull); }
+.conf-2 { color: var(--warn); }
+.conf-1 { color: var(--bear); }
+
+/* ── Misc ── */
+.footnote {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--fg-mute);
+  margin-top: 32px;
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+  line-height: 1.8;
+}
+.divergence-box {
+  background: var(--warn-bg);
+  border: 1px solid var(--warn);
+  border-radius: 5px;
+  padding: 10px 14px;
+  font-size: 12px;
+  color: var(--warn);
+  margin-top: 12px;
+}
+.divergence-box strong { font-weight: 600; }
+p { margin-bottom: 10px; }
+p:last-child { margin-bottom: 0; }
+ul { padding-left: 18px; }
+li { margin-bottom: 4px; font-size: 13px; color: var(--fg-mid); }
+</style>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="masthead-eyebrow">Daily Market Digest &bull; Session 001</div>
+  <div class="masthead-title">Monday, November 23, 2026</div>
+  <div class="masthead-sub">Pre-market / Early AM ET &mdash; All prices sourced via live web search during this session</div>
+  <div class="masthead-alert">&#9650; Correction Territory &mdash; S&amp;P 500 &gt;10% Below October High</div>
+</div>
+
+<!-- SECTION 0: PRIOR TRADE REVIEW -->
+<div class="section">
+  <div class="section-label">Section 0</div>
+  <div class="section-title">Prior Trade Review</div>
+  <p style="font-size:13px;color:var(--fg-mid);">No open positions &mdash; first session. No prior digest on file.</p>
+</div>
+
+<hr class="rule">
+
+<!-- SECTION 1: MARKET SNAPSHOT -->
+<div class="section">
+  <div class="section-label">Section 1</div>
+  <div class="section-title">Market Snapshot</div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Index</th>
+          <th>Friday Close</th>
+          <th>Friday %</th>
+          <th>Week %</th>
+          <th>Mon Futures</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="td-ticker">S&amp;P 500</td>
+          <td class="td-mono">6,910.39</td>
+          <td class="td-mono dn">-3.70%</td>
+          <td class="td-mono dn">-8.6%</td>
+          <td class="td-mono up">+2.91% ~7,137</td>
+          <td><span class="chip chip-bear">Correction</span></td>
+        </tr>
+        <tr>
+          <td class="td-ticker">Nasdaq</td>
+          <td class="td-mono">22,617.73</td>
+          <td class="td-mono dn">-5.28%</td>
+          <td class="td-mono dn">-10.0%</td>
+          <td class="td-mono up">+3.62% ~26,037</td>
+          <td><span class="chip chip-bear">Correction</span></td>
+        </tr>
+        <tr>
+          <td class="td-ticker">Dow Jones</td>
+          <td class="td-mono">48,147.33</td>
+          <td class="td-mono dn">-1.93%</td>
+          <td class="td-mono dn">-8.0%</td>
+          <td class="td-mono up">~+2.5%</td>
+          <td><span class="chip chip-bear">Correction</span></td>
+        </tr>
+        <tr>
+          <td class="td-ticker">Russell 2000</td>
+          <td class="td-mono">2,581.79</td>
+          <td class="td-mono dn">-2.76%</td>
+          <td class="td-mono dn">~-8.0%</td>
+          <td class="td-mono up">~+2.0%</td>
+          <td><span class="chip chip-bear">Bearish</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:12px;color:var(--fg-mute);margin-top:4px;">The S&amp;P 500 is officially in correction territory (&gt;10% below its October 6 record high). The Nasdaq erased its entire 2026 gain in a single week. Monday futures signal a reflexive oversold bounce; the fundamental drivers have not resolved.</p>
+
+  <div style="margin-top:20px;">
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Asset</th>
+            <th>Level</th>
+            <th>Move</th>
+            <th>Bias</th>
+            <th>Signal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-ticker">VIX</td>
+            <td class="td-mono">~35.89 Fri &rarr; ~30 Mon</td>
+            <td class="td-mono dn">+26.2% Fri</td>
+            <td><span class="chip chip-warn">Elevated</span></td>
+            <td class="td-signal">Not collapsing with Monday rally &mdash; conviction in bounce absent. <strong>VIX divergence: flag.</strong></td>
+          </tr>
+          <tr>
+            <td class="td-ticker">10Y Treasury</td>
+            <td class="td-mono">~4.91&ndash;4.95%</td>
+            <td class="td-mono flat">&mdash;</td>
+            <td><span class="chip chip-bear">Hawkish</span></td>
+            <td class="td-signal">Bonds not rallying during equity stress. Fed path (not growth fear) is driving the dislocation. Near-5% yield = hawkish until proven otherwise.</td>
+          </tr>
+          <tr>
+            <td class="td-ticker">Gold</td>
+            <td class="td-mono">~$3,622</td>
+            <td class="td-mono up">+2.53% Mon</td>
+            <td><span class="chip chip-bull">Bullish</span></td>
+            <td class="td-signal">Multi-factor support: AI uncertainty + inflation hedge + fear trade. Clean move above $3,550.</td>
+          </tr>
+          <tr>
+            <td class="td-ticker">WTI Crude</td>
+            <td class="td-mono">~$83.24</td>
+            <td class="td-mono dn">~-3.5% Mon</td>
+            <td><span class="chip chip-bear">Bearish</span></td>
+            <td class="td-signal">Demand concerns overriding supply-side support from Gulf shipping tensions. Watch $80.</td>
+          </tr>
+          <tr>
+            <td class="td-ticker">Brent Crude</td>
+            <td class="td-mono">~$88.83</td>
+            <td class="td-mono dn">~-4.0% Mon</td>
+            <td><span class="chip chip-bear">Bearish</span></td>
+            <td class="td-signal">Sliding despite geopolitical overhang.</td>
+          </tr>
+          <tr>
+            <td class="td-ticker">Copper</td>
+            <td class="td-mono">~$5.53/lb</td>
+            <td class="td-mono flat">&mdash;</td>
+            <td><span class="chip chip-neut">Neutral</span></td>
+            <td class="td-signal">Holding; no demand destruction signal yet. Watch $5.30 break as the real economy transmission level.</td>
+          </tr>
+          <tr>
+            <td class="td-ticker">Bitcoin</td>
+            <td class="td-mono">~$61,428</td>
+            <td class="td-mono dn">&mdash;</td>
+            <td><span class="chip chip-bear">Risk-Off</span></td>
+            <td class="td-signal">Pure risk asset. Tracking Nasdaq lower. No safe-haven function. Confirms this is a broad sentiment event.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="divergence-box">
+    <strong>Key Divergence:</strong> Bonds yielding near 5% while equities sell off and gold rallies simultaneously &mdash; a stagflation-lite read. The market is pricing higher rates AND risk aversion at the same time. This unusual configuration raises the cost of a sustained equity recovery.
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- SECTION 2: TOP NEWS -->
+<div class="section">
+  <div class="section-label">Section 2</div>
+  <div class="section-title">Top News &amp; Catalysts</div>
+
+  <div class="news-item">
+    <div class="news-header">
+      <span class="chip chip-high">High Impact</span>
+      <div class="news-title">Anthropic IPO Fizzles, Triggering AI-Wide Derating</div>
+    </div>
+    <div class="news-body">
+      Anthropic (NASDAQ: <strong>ANT</strong>) priced at $83/share on Nov. 18 and raised $81.3B &mdash; the largest IPO on record. The stock opened at $111.50 on its Nov. 19 debut, closed the first day at $97.17 (+17%), but has since faded to ~$88&ndash;89. The fizzle shattered the narrative that AI valuations were still expanding. Nvidia fell 23% in the week following the IPO. If the most anticipated private AI company cannot hold its first-day gains, the entire AI multiple expansion story is under scrutiny. Anthropic&rsquo;s $1.76 trillion first-day valuation has already eroded.
+    </div>
+    <div class="news-impl">Positioning implication: ANT&rsquo;s $83 IPO price is now a psychological floor. AI derating is not over &mdash; the sector still needs a valuation clearing price.</div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-header">
+      <span class="chip chip-high">High Impact</span>
+      <div class="news-title">Fed December Rate Hike at 99.2% Probability — Dec 9 Is the Binary</div>
+    </div>
+    <div class="news-body">
+      CME FedWatch shows near-certainty of a December 9 hike. The question has shifted to: 25bps or 50bps, and how hawkish is the statement language? Markets spent most of 2026 pricing in a gradual cut cycle; that is now fully reversed. With equities down 10%+ from highs, any Fed walk-back of the hike would be a material positive catalyst. A hike + hawkish guidance validates and extends the sell-off.
+    </div>
+    <div class="news-impl">Positioning implication: December 9 is the event horizon. Everything until then is positioning noise around an oversold bounce.</div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-header">
+      <span class="chip chip-high">High Impact</span>
+      <div class="news-title">Nvidia Loses ~$1 Trillion in Market Cap in One Week</div>
+    </div>
+    <div class="news-body">
+      Nvidia fell approximately 23% over the past week &mdash; likely the largest single-week market cap destruction in history. Semiconductor stocks as a group are in their worst two-month slump since 2001. Monday premarket: NVDA up ~6.9%, leading the bounce. Nvidia is now in bear market territory from its October peak. The bounce is real but the AI valuation reset is not complete; the Fed catalyst has not cleared. Goldman Sachs reportedly set three conditions for a bottom: confidence in AI earnings, a dovish Fed signal, or a sharp reduction in investor positioning. None are present yet.
+    </div>
+    <div class="news-impl">Positioning implication: Quality long-term entry levels are forming. But oversold ≠ bottomed.</div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-header">
+      <span class="chip chip-mod">Moderate&ndash;High Impact</span>
+      <div class="news-title">CrowdStrike Acquires Zscaler in $43.9B All-Stock Deal</div>
+    </div>
+    <div class="news-body">
+      Announced Monday via SEC 8-K. CRWD acquires ZS in an all-stock transaction (1.135 CRWD shares per ZS share), valuing Zscaler at approximately $43.9 billion &mdash; the largest cybersecurity deal ever. ZS shares up ~8&ndash;19% premarket; CRWD down ~8.5%. CRWD claims $500M in annual cost synergies within 18&ndash;24 months. The all-stock structure is a significant dilution event for CRWD shareholders; the market&rsquo;s negative reaction is rational. TD Cowen says this signals cybersecurity consolidation entering &ldquo;a more material phase.&rdquo;
+    </div>
+    <div class="news-impl">Positioning implication: ZS is a pure acquisition arb. CRWD needs to prove the strategic case; near-term pressure likely. The deal puts a M&amp;A floor under the cybersecurity sector broadly.</div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-header">
+      <span class="chip chip-mod">Moderate Impact</span>
+      <div class="news-title">Global Contagion: Nikkei -5.1%, Kospi -4%, Taiwan -6.2% (Friday)</div>
+    </div>
+    <div class="news-body">
+      Japan closed Monday for Labour Thanksgiving Day following Friday&rsquo;s 5.06% Nikkei collapse. South Korea&rsquo;s Kospi fell ~4% to 10-month lows before finding support. Taiwan&rsquo;s Taiex dropped 6.23% Friday. European futures are modestly higher Monday, taking some comfort from the US futures bounce. The global spread confirms this is not a narrow US technical event &mdash; it is an AI trade unwind with global positioning exposure.
+    </div>
+    <div class="news-impl">Positioning implication: Global contagion reduces the probability of a quick US-only recovery; reduces the Fed&rsquo;s room to stay hawkish without global blowback.</div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- SECTION 3: STOCKS IN FOCUS -->
+<div class="section">
+  <div class="section-label">Section 3</div>
+  <div class="section-title">Stocks in Focus</div>
+
+  <div class="stock-item">
+    <div class="stock-header">
+      <span class="stock-ticker">NVDA</span>
+      <span class="stock-name">Nvidia Corporation</span>
+      <span class="chip chip-neut">Tactical Bounce</span>
+    </div>
+    <div class="stock-body">Covered in §2. Setup from here: carving a short-term bottom after a 23% weekly collapse. Monday&rsquo;s +6.9% premarket pop will test resistance at the breakdown level. Volume matters &mdash; a bounce on declining volume confirms a dead-cat pattern. Analyst target cuts have been modest; most sell-side keeps the long-term AI capex thesis. Institutional buyers will wait for stabilization near the 50-week MA before adding aggressively. The bear market entry from October&rsquo;s high is real and not yet resolved.</div>
+    <div class="stock-level">&#9888; PRICE UNVERIFIED &mdash; confirm before entry</div>
+  </div>
+
+  <div class="stock-item">
+    <div class="stock-header">
+      <span class="stock-ticker">ANT</span>
+      <span class="stock-name">Anthropic PBC</span>
+      <span class="chip chip-bear">IPO Floor Test</span>
+    </div>
+    <div class="stock-body">Covered in §2. The $83 IPO price is the structural support &mdash; no rational seller wants to validate a sub-IPO-price outcome in the first week. But lock-up dynamics and the AI derating narrative keep pressure on. Reclaiming $97.17 (IPO day close) would be a bullish signal. A close below $83 becomes a signal event for the entire AI sector and would likely trigger another down-leg in AI names broadly.</div>
+    <div class="stock-level">~$88&ndash;89 (verify live)</div>
+  </div>
+
+  <div class="stock-item">
+    <div class="stock-header">
+      <span class="stock-ticker">ZS</span>
+      <span class="stock-name">Zscaler &mdash; Acquisition Target</span>
+      <span class="chip chip-bull">M&amp;A Premium</span>
+    </div>
+    <div class="stock-body">Upside bounded by the CRWD exchange ratio value; downside risk is deal break. At Monday premarket levels, ZS is a standard acquisition arb opportunity. Not a momentum play. Watch for any FTC/DOJ comment, which is the primary break risk.</div>
+    <div class="stock-level">&#9888; PRICE UNVERIFIED &mdash; confirm spread vs CRWD implied value</div>
+  </div>
+
+  <div class="stock-item">
+    <div class="stock-header">
+      <span class="stock-ticker">CRWD</span>
+      <span class="stock-name">CrowdStrike Holdings</span>
+      <span class="chip chip-bear">Post-Deal Pressure</span>
+    </div>
+    <div class="stock-body">Down ~8.5% premarket on the acquisition announcement. All-stock deal = significant dilution. The fundamental question: is $43.9B for Zscaler&rsquo;s ~$2.1B in annual revenue (roughly 21x revenue) defensible? Near-term recovery to pre-announcement levels requires the market to accept the strategic case. Partial recovery possible if tech bounces broadly.</div>
+    <div class="stock-level">&#9888; PRICE UNVERIFIED &mdash; confirm before entry</div>
+  </div>
+
+  <div class="stock-item">
+    <div class="stock-header">
+      <span class="stock-ticker">CRNC</span>
+      <span class="stock-name">Cerence Inc.</span>
+      <span class="chip chip-bull">Premarket Gapper</span>
+    </div>
+    <div class="stock-body">+15.8% premarket per Seeking Alpha&rsquo;s 6:36 AM ET report, leading all premarket gainers. No specific catalyst identified in search results. Likely AI/automotive-AI adjacent. Requires a live news check before any entry consideration.</div>
+    <div class="stock-level">&#9888; Catalyst unconfirmed &mdash; check news before entry</div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- SECTION 4: MACRO THEMES -->
+<div class="section">
+  <div class="section-label">Section 4</div>
+  <div class="section-title">Macro &amp; Market Themes</div>
+
+  <p style="font-size:14px;font-family:'Space Grotesk',sans-serif;font-weight:600;color:var(--fg);margin-bottom:6px;">Theme 1: AI Valuation Reset &mdash; Inning 3 of 9</p>
+  <p style="font-size:13px;color:var(--fg-mid);">The Anthropic IPO was the catalyst, but the underlying issue is fundamental: what multiple do you put on AI earnings that may not materialize for 2&ndash;3 years? The AI trade from early 2025 through October 2026 was driven by two things &mdash; Nvidia revenue beats and the assumption that hyperscaler AI capex would translate to outsized returns. Neither has been tested against a real tightening cycle. The December Fed hike &mdash; almost certainly coming &mdash; is the first real rate test for this trade. The sell-off may pause on Monday (oversold bounce), but the valuation reset needs either credible AI earnings delivery or a Fed pivot to get back to highs. Neither is coming in the next two weeks. We are in the middle innings of this correction, not the end.</p>
+
+  <p style="font-size:14px;font-family:'Space Grotesk',sans-serif;font-weight:600;color:var(--fg);margin-top:18px;margin-bottom:6px;">Theme 2: Fed Re-Enters as a Negative Catalyst</p>
+  <p style="font-size:13px;color:var(--fg-mid);">Markets spent most of 2026 pricing in a gradual rate-cut cycle. That is now fully reversed. With 99.2% probability on a December hike and 10Y yields near 5%, the discount rate that drove AI multiple expansion is now a headwind. This mirrors the late-2022 dynamic that crushed high-multiple tech &mdash; just with different leadership names. Key difference from 2022: corporate balance sheets are stronger, and actual AI revenues (Nvidia, Microsoft, Google) are real and growing. That sets a floor. But it does not prevent a further 5&ndash;10% compression in price-to-sales multiples for the most expensive names before December 9.</p>
+</div>
+
+<hr class="rule">
+
+<!-- SECTION 5: WHAT TO WATCH -->
+<div class="section">
+  <div class="section-label">Section 5</div>
+  <div class="section-title">What to Watch Next</div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Catalyst</th>
+          <th>Bullish Outcome</th>
+          <th>Bearish Outcome</th>
+          <th>Threshold</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-weight:600;font-family:'Space Grotesk',sans-serif;font-size:13px;white-space:nowrap;">FOMC &mdash; Dec 9</td>
+          <td class="td-signal">25bps hike + softened language signaling a pause; market re-rates lower rates</td>
+          <td class="td-signal">25&ndash;50bps + hawkish statement; AI multiples compress further</td>
+          <td class="td-signal">Does the Fed acknowledge the market correction, or do inflation concerns dominate?</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;font-family:'Space Grotesk',sans-serif;font-size:13px;white-space:nowrap;">Nvidia Earnings<br><span style="font-weight:400;font-size:11px;color:var(--fg-mute)">Late Nov / Early Dec</span></td>
+          <td class="td-signal">Revenue beat + guidance maintaining AI chip demand projections</td>
+          <td class="td-signal">Guidance cut or softened AI demand language; validates sell-off narrative</td>
+          <td class="td-signal">Any reduction in data center revenue guidance accelerates the AI derating</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;font-family:'Space Grotesk',sans-serif;font-size:13px;white-space:nowrap;">ANT &mdash; $83 Hold</td>
+          <td class="td-signal">ANT holds $83 and recovers toward $97; AI sentiment stabilizes</td>
+          <td class="td-signal">ANT breaks below $83 IPO price; profound negative signal for all AI names</td>
+          <td class="td-signal">$83 is the line</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;font-family:'Space Grotesk',sans-serif;font-size:13px;white-space:nowrap;">CRWD/ZS Regulatory</td>
+          <td class="td-signal">Fast-track close; validates cybersecurity consolidation thesis</td>
+          <td class="td-signal">FTC/DOJ challenge or deal break; ZS gives back premium</td>
+          <td class="td-signal">Any FTC or DOJ comment in the next 30 days</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- SECTION 6: BOTTOM LINE -->
+<div class="section">
+  <div class="section-label">Section 6</div>
+  <div class="section-title">Bottom Line</div>
+  <div class="bottom-line">
+    <p>What mattered today was not Monday&rsquo;s bounce &mdash; it was the context beneath it: the market entered correction territory on an AI valuation crisis compounded by near-certain Fed rate hike expectations, with the Anthropic IPO fizzle as the symbolic event that broke the AI bull narrative.</p>
+    <p>The next 3&ndash;5 days are likely to see continued oversold relief, with futures-led gaps higher that fade as each session progresses, as the market seeks a sustainable bottom before the December 9 FOMC decision.</p>
+    <p>The risk that breaks the thesis entirely is an ANT break below $83 combined with Nvidia earnings disappointment &mdash; if both happen before December 9, the AI sector could see another leg down of 10&ndash;15% that neither institutional buyers nor oversold conditions can absorb.</p>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- SECTION 7: CATALYST PLAYS -->
+<div class="section">
+  <div class="section-label">Section 7</div>
+  <div class="section-title">Catalyst Plays</div>
+
+  <div class="play-item">
+    <div class="play-title">Play 1: Gold as Multi-Factor Macro Hedge &mdash; Bullish GLD</div>
+    <div class="play-row">
+      <span class="play-label">Theme</span>
+      <span>AI uncertainty + near-5% Treasury yields + global risk-off flows create simultaneous tailwinds for gold that do not require a macro reversal to work.</span>
+    </div>
+    <div class="play-row">
+      <span class="play-label">Edge</span>
+      <span>Gold is uncorrelated to AI valuations. It benefits from inflation expectations regardless of FOMC direction, and global central bank (China, India) systematic buying provides a structural bid.</span>
+    </div>
+    <div class="play-row">
+      <span class="play-label">Expression</span>
+      <span>GLD (ETF) or spot gold. GDX (miners) for higher beta. GLD calls for duration plays through the FOMC.</span>
+    </div>
+    <div class="play-row">
+      <span class="play-label">Timeframe</span>
+      <span>4&ndash;6 weeks (through FOMC and beyond)</span>
+    </div>
+    <div class="play-kill">Kill thesis: Fed signals clear pivot to cuts + AI earnings validation both occur in December, triggering sharp risk-on rotation out of gold. OR oil collapse pulls inflation expectations sharply lower.</div>
+  </div>
+
+  <div class="play-item">
+    <div class="play-title">Play 2: Cybersecurity Consolidation &mdash; Moderate Long CIBR</div>
+    <div class="play-row">
+      <span class="play-label">Theme</span>
+      <span>CRWD/ZS deal signals M&amp;A consolidation phase in cybersecurity. The sector has been sold off with broader tech, creating an opportunity: acquisition activity creates a floor as larger players hunt cheaper targets.</span>
+    </div>
+    <div class="play-row">
+      <span class="play-label">Edge</span>
+      <span>Cybersecurity spend is non-discretionary for enterprises &mdash; real revenue that does not depend on AI multiple expansion. The sell-off has dragged quality names to more reasonable valuations, and the CRWD/ZS deal puts a premium bid floor under the sector.</span>
+    </div>
+    <div class="play-row">
+      <span class="play-label">Expression</span>
+      <span>CIBR (First Trust Nasdaq Cybersecurity ETF) for diversified exposure without single-stock arb risk. BUG (Amplify ETF) as alternative.</span>
+    </div>
+    <div class="play-row">
+      <span class="play-label">Timeframe</span>
+      <span>4&ndash;8 weeks</span>
+    </div>
+    <div class="play-kill">Kill thesis: Broad market continues lower and pulls all tech regardless of fundamentals. OR CRWD/ZS deal falls apart, signaling consolidation was an isolated event.</div>
+  </div>
+
+  <div class="play-item">
+    <div class="play-title">Play 3: AI Chip Tactical Bounce &mdash; Conditional Long NVDA / SOXL</div>
+    <div class="play-row">
+      <span class="play-label">Theme</span>
+      <span>Semiconductor names (NVDA, MRVL, MU) have experienced one of the worst two-month slumps since 2001. Near-term oversold bounces are tradeable. Thesis is <em>not</em> full recovery to highs &mdash; it is a tactical 10&ndash;15% rebound on short-covering and dip-buying.</span>
+    </div>
+    <div class="play-row">
+      <span class="play-label">Edge</span>
+      <span>At -23% in a week, NVDA has priced in significant AI demand deterioration. If upcoming earnings show any stabilization, the gap between current price and fair value is wide enough for a substantial rebound.</span>
+    </div>
+    <div class="play-row">
+      <span class="play-label">Expression</span>
+      <span>NVDA directly (most liquid, highest beta). SOXL (3x leveraged semiconductor ETF) for a short-duration, high-conviction bet &mdash; size accordingly given the leverage.</span>
+    </div>
+    <div class="play-row">
+      <span class="play-label">Timeframe</span>
+      <span>1&ndash;3 weeks (tactical only)</span>
+    </div>
+    <div class="play-kill">Kill thesis: Nvidia provides soft forward guidance at earnings. ANT breaks $83 IPO floor. Fed signals 50bps or more hawkish posture than expected.</div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- SECTION 8: QUICK REFERENCE -->
+<div class="section">
+  <div class="section-label">Section 8</div>
+  <div class="section-title">Quick Reference</div>
+
+  <p style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;margin-bottom:10px;">Market Overview</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Asset</th>
+          <th>Bias</th>
+          <th>Level</th>
+          <th>Signal Read</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="td-ticker">S&amp;P 500</td>
+          <td><span class="chip chip-neut">Bounce</span></td>
+          <td class="td-level">6,910 Fri / ~7,137 fut</td>
+          <td class="td-signal">Correction territory; futures +2.9% Mon but thesis not cleared</td>
+        </tr>
+        <tr>
+          <td class="td-ticker">Nasdaq</td>
+          <td><span class="chip chip-neut">Bounce</span></td>
+          <td class="td-level">22,618 Fri / ~26,037 fut</td>
+          <td class="td-signal">Worst week since pandemic; erased 2026 gains; +3.6% futures Monday</td>
+        </tr>
+        <tr>
+          <td class="td-ticker">Dow Jones</td>
+          <td><span class="chip chip-neut">Bounce</span></td>
+          <td class="td-level">48,147</td>
+          <td class="td-signal">Correction confirmed; less AI-exposed, relative outperformer</td>
+        </tr>
+        <tr>
+          <td class="td-ticker">Russell 2000</td>
+          <td><span class="chip chip-bear">Bearish</span></td>
+          <td class="td-level">2,582</td>
+          <td class="td-signal">Most rate-sensitive index; underperforms on December hike path</td>
+        </tr>
+        <tr>
+          <td class="td-ticker">VIX</td>
+          <td><span class="chip chip-warn">Elevated</span></td>
+          <td class="td-level">~35.89 Fri &rarr; ~30 Mon</td>
+          <td class="td-signal">Not collapsing with Monday rally &mdash; conviction in bounce absent</td>
+        </tr>
+        <tr>
+          <td class="td-ticker">10Y Treasury</td>
+          <td><span class="chip chip-bear">Hawkish</span></td>
+          <td class="td-level">~4.91%</td>
+          <td class="td-signal">Near 5%, Fed hike priced in; no safe-haven bid; stagflation signal</td>
+        </tr>
+        <tr>
+          <td class="td-ticker">Gold</td>
+          <td><span class="chip chip-bull">Bullish</span></td>
+          <td class="td-level">~$3,622</td>
+          <td class="td-signal">Multi-factor support: fear + inflation + dollar uncertainty</td>
+        </tr>
+        <tr>
+          <td class="td-ticker">Oil (WTI)</td>
+          <td><span class="chip chip-bear">Bearish</span></td>
+          <td class="td-level">~$83.24</td>
+          <td class="td-signal">Demand concerns overriding supply; watch $80</td>
+        </tr>
+        <tr>
+          <td class="td-ticker">Copper</td>
+          <td><span class="chip chip-neut">Neutral</span></td>
+          <td class="td-level">~$5.53/lb</td>
+          <td class="td-signal">Holding; no demand destruction signal yet &mdash; watch $5.30 break</td>
+        </tr>
+        <tr>
+          <td class="td-ticker">Bitcoin</td>
+          <td><span class="chip chip-bear">Risk-Off</span></td>
+          <td class="td-level">~$61,428</td>
+          <td class="td-signal">Pure risk asset; tracking Nasdaq lower; no safe-haven function</td>
+        </tr>
+        <tr>
+          <td class="td-ticker">ANT</td>
+          <td><span class="chip chip-bear">Bearish</span></td>
+          <td class="td-level">~$88&ndash;89</td>
+          <td class="td-signal">IPO fizzle; $83 IPO floor is key structural support; $97 is recapture level</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="trade-section" style="margin-top:28px;">
+    <p style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;margin-bottom:14px;">Trade Sheet</p>
+
+    <div class="trade-label">Active Trades &mdash; Confidence 2&ndash;3</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Ticker</th>
+            <th>Direction</th>
+            <th>Entry Zone</th>
+            <th>Target</th>
+            <th>Stop</th>
+            <th>Timeframe</th>
+            <th>Conf</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-ticker">GLD</td>
+            <td><span class="chip chip-bull">Long</span></td>
+            <td class="td-mono">$325&ndash;$330<br><span class="unverified">verify: ~$3,622 spot</span></td>
+            <td class="td-mono">$360+ (spot ~$3,900)</td>
+            <td class="td-mono">$310 (spot ~$3,370)</td>
+            <td class="td-mono">4&ndash;6 wks</td>
+            <td><span class="conf conf-3">3</span></td>
+          </tr>
+          <tr>
+            <td class="td-ticker">CIBR</td>
+            <td><span class="chip chip-bull">Long</span></td>
+            <td class="td-mono">$65&ndash;$68<br><span class="unverified">PRICE UNVERIFIED</span></td>
+            <td class="td-mono">$75</td>
+            <td class="td-mono">$61</td>
+            <td class="td-mono">4&ndash;8 wks</td>
+            <td><span class="conf conf-2">2</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="trade-label" style="margin-top:20px;">Speculative Watchlist &mdash; Confidence 1 &mdash; Max 0.5% portfolio per position</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Ticker</th>
+            <th>Direction</th>
+            <th>Entry Zone</th>
+            <th>Target</th>
+            <th>Stop</th>
+            <th>Timeframe</th>
+            <th>Conf</th>
+            <th>Condition Required</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-ticker">NVDA</td>
+            <td><span class="chip chip-bull">Long</span></td>
+            <td class="td-mono"><span class="unverified">PRICE UNVERIFIED</span></td>
+            <td class="td-mono">+15&ndash;20%</td>
+            <td class="td-mono">&minus;8%</td>
+            <td class="td-mono">2&ndash;3 wks</td>
+            <td><span class="conf conf-1">1</span></td>
+            <td class="td-signal">Requires Nvidia earnings stabilization OR ANT holds $83 IPO floor</td>
+          </tr>
+          <tr>
+            <td class="td-ticker">SOXL</td>
+            <td><span class="chip chip-bull">Long</span></td>
+            <td class="td-mono"><span class="unverified">PRICE UNVERIFIED</span></td>
+            <td class="td-mono">+25%</td>
+            <td class="td-mono">None &mdash; binary, full position at risk</td>
+            <td class="td-mono">1&ndash;2 wks</td>
+            <td><span class="conf conf-1">1</span></td>
+            <td class="td-signal">Confirm NVDA premarket continuation into the close on volume</td>
+          </tr>
+          <tr>
+            <td class="td-ticker">ANT</td>
+            <td><span class="chip chip-bear">Short / Put Spread</span></td>
+            <td class="td-mono">~$88&ndash;$90<br><span class="unverified">verify live</span></td>
+            <td class="td-mono">$83 / put spread profits</td>
+            <td class="td-mono">None &mdash; binary event, full position at risk</td>
+            <td class="td-mono">1&ndash;2 wks</td>
+            <td><span class="conf conf-1">1</span></td>
+            <td class="td-signal">Requires ANT failing to reclaim $97 IPO day close within 3 trading days</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="footnote">
+  <div>Digest generated: Monday, November 23, 2026 &bull; Pre-market / Early AM ET &bull; Session 001 &bull; First session &mdash; no prior trade sheet.</div>
+  <div>All prices sourced via live web search during this session. Items marked PRICE UNVERIFIED could not be confirmed from intraday sources &mdash; confirm on a live terminal before any entry. This digest is for informational purposes and does not constitute investment advice.</div>
+  <div style="margin-top:6px;">Sources: Bloomberg, ABC News, Nordfx Market Pulse, Schwab Market Update, FXStreet, JournalArta, Benzinga, Yahoo Finance, Invezz, SCWorld, SEC EDGAR (CRWD 8-K), CNN, CNBC, Seeking Alpha Premarket, USA Herald, HNGN, 24/7 Wall St., WorldMoneyRoadmap, StreetStats Finance.</div>
+</div>
